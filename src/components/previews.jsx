@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { marked } from 'marked';
 import placeholder from './constante';
-marked.setOptions({
-    breaks: true,
-});
+import Toolbar from './toolbar';
+import Editor from './editor';
+import Preview from './preview';
 
-const renderer = new marked.Renderer();
 export default class previews extends Component {
     constructor(props) {
         super(props);
@@ -21,6 +19,23 @@ export default class previews extends Component {
         });
     }
     render() {
-        return <div>preview</div>;
+        return (
+            <div>
+                <h1>React Markdown Preview</h1>
+                <div>
+                    <div>
+                        <Toolbar text="Editor" />
+                        <Editor
+                            markdown={this.state.markdown}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div>
+                        <Toolbar text="Preview" />
+                        <Preview markdown={this.state.markdown} />
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
